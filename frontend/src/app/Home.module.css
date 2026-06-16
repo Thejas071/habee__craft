@@ -1,0 +1,212 @@
+/* =========================================
+   HOME — Minimal like reference image
+   White bg, thin fonts, outlined button
+   ========================================= */
+
+/* ── HERO ── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 88vh;
+  background: #f5f0ed; /* light pinkish-cream */
+  overflow: hidden;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px;
+  background: #ffffff;
+  position: relative;
+}
+
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 600;
+  color: #1a1614;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+  max-width: 400px;
+}
+
+.heroSubtitle {
+  font-size: 0.95rem;
+  color: #8a8280;
+  margin-bottom: 36px;
+  max-width: 320px;
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* Outlined button — exactly like "View all products" in reference */
+.heroCta {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 1.5px solid #1a1614;
+  color: #1a1614;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: 0; /* sharp corners like reference */
+  transition: all 0.2s ease;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.heroCta:hover {
+  background: #1a1614;
+  color: #ffffff;
+}
+
+/* Right side visual */
+.heroVisual {
+  position: relative;
+  overflow: hidden;
+  background: #f0e8e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroBlob {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,54,107,0.12) 0%, rgba(212,163,115,0.1) 60%, transparent 100%);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-18px) scale(1.04); }
+}
+
+/* ── FEATURES ── */
+.features {
+  padding: 88px 40px;
+  background: #ffffff;
+  border-top: 1px solid #f0ebe8;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 600;
+  color: #1a1614;
+  margin-bottom: 52px;
+  letter-spacing: -0.025em;
+}
+
+.featuresGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.featureCard {
+  padding: 32px 24px;
+  border: 1px solid #ede8e5;
+  border-radius: 12px;
+  text-align: center;
+  background: #fff;
+  transition: all 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.featureCard:hover {
+  border-color: #c9366b;
+  box-shadow: 0 4px 20px rgba(201,54,107,0.08);
+  transform: translateY(-4px);
+}
+
+.featureEmoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.featureTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1614;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+.featureText {
+  font-size: 0.85rem;
+  color: #8a8280;
+  line-height: 1.6;
+}
+
+/* ── CTA STRIP ── */
+.ctaStrip {
+  padding: 56px 40px;
+  background: #f9f3f0;
+  border-top: 1px solid #ede8e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.ctaText {
+  font-size: 1.1rem;
+  color: #1a1614;
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 11px 26px;
+  background: #25D366;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.ctaBtn:hover {
+  background: #1da855;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .heroText {
+    padding: 64px 36px;
+    order: 2;
+  }
+  .heroVisual {
+    height: 220px;
+    order: 1;
+  }
+  .heroTitle { max-width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .heroText { padding: 48px 24px; }
+  .features { padding: 60px 20px; }
+  .featuresGrid { gap: 16px; }
+  .ctaStrip { padding: 40px 20px; flex-direction: column; gap: 16px; }
+}

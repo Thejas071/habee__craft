@@ -1,0 +1,223 @@
+/* ── SHOP PAGE ── Warm, editorial, gifting brand ── */
+
+.shopContainer {
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Hero banner */
+.hero {
+  background: linear-gradient(135deg, #fdf8f5 0%, #fdf3e7 100%);
+  padding: 80px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '🎁';
+  position: absolute;
+  font-size: 110px;
+  opacity: 0.05;
+  top: -10px;
+  right: 5%;
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+
+.pageTitle {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: #1e1414;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #a09490;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* Main content */
+.shopContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.filterBar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: var(--bg-warm, #fdf8f5);
+  padding: 20px 24px;
+  border-radius: 18px;
+  border: 1px solid #edddd8;
+  box-shadow: 0 2px 8px rgba(180,100,100,0.06);
+}
+
+.searchWrapper { flex: 1; min-width: 0; }
+.sortWrapper { flex-shrink: 0; }
+
+/* Search and Sort styles are now inline in their components */
+
+.resultsText {
+  font-size: 0.95rem;
+  color: #8a7f7c;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Grid */
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.noProducts {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  border: 1.5px dashed #e0d5d1;
+  border-radius: 14px;
+  color: #8a7f7c;
+}
+
+.noProductsTitle { font-size: 1.4rem; color: #1e1414; font-family: var(--serif); }
+
+/* Premium product card */
+.productCard {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.productCard:hover {
+  border-color: var(--brand-primary);
+  box-shadow: 0 8px 24px rgba(201,54,107,0.06);
+  transform: translateY(-5px);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 256px;
+  overflow: hidden;
+  background: #fdf8f5;
+}
+
+.imageContainer::after {
+  content: 'Shop Now →';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  color: #c9366b;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+
+.productCard:hover .imageContainer::after { opacity: 1; }
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.productCard:hover .productImage { transform: scale(1.08); }
+
+.productContent {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+}
+
+.productName {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e1414;
+  font-family: var(--font);
+  transition: color 0.15s;
+}
+
+.productCard:hover .productName { color: #c9366b; }
+
+.productDescription {
+  font-size: 0.85rem;
+  color: #8a7f7c;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #f5eeeb;
+}
+
+.productPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #c9366b;
+  letter-spacing: -0.01em;
+}
+
+.viewDetailsBtn {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a09490;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.15s;
+}
+
+.productCard:hover .viewDetailsBtn { color: #c9366b; }
+
+@media (max-width: 768px) {
+  .hero { padding: 60px 24px; }
+  .shopContent { padding: 48px 24px; gap: 24px; }
+  .filterBar { flex-direction: column; align-items: stretch; }
+  .productsGrid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .imageContainer { height: 180px; }
+  .imageContainer::after { display: none; }
+  .productContent { padding: 16px; }
+}
+
+@media (max-width: 400px) {
+  .productsGrid { grid-template-columns: 1fr; }
+}

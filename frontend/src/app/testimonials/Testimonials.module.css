@@ -1,0 +1,152 @@
+/* ── TESTIMONIALS PAGE ── Warm, editorial, gifting brand ── */
+
+.testimonialsContainer {
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Hero banner */
+.hero {
+  background: linear-gradient(135deg, #fdf3e7 0%, #fce8f0 100%);
+  padding: 80px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '✨';
+  position: absolute;
+  font-size: 100px;
+  opacity: 0.08;
+  top: 10px;
+  left: 10%;
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.pageTitle {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: #1e1414;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #a09490;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* Reviews Grid */
+.reviewsSection {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.reviewCard {
+  background: #ffffff;
+  border: 1px solid #edddd8;
+  padding: 36px 32px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(201,54,107,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.reviewCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(201,54,107,0.08);
+  border-color: #c9366b;
+}
+
+.quoteIcon {
+  position: absolute;
+  top: 30px;
+  right: 32px;
+  font-size: 3.5rem;
+  font-family: var(--serif);
+  color: #fce8f0;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.ratingContainer {
+  display: flex;
+  gap: 4px;
+  z-index: 1;
+}
+
+.starIcon {
+  width: 18px;
+  height: 18px;
+  fill: #f59e0b; /* Amber */
+}
+
+.reviewText {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #5a4f4c;
+  font-style: italic;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+.clientDetails {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+  border-top: 1px solid #f5eeeb;
+  padding-top: 20px;
+  z-index: 1;
+}
+
+.clientAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fdf3e7;
+  color: #d4a373;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e1414;
+}
+
+.clientOccasion {
+  font-size: 0.82rem;
+  color: #a09490;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 60px 24px; }
+  .reviewsSection { padding: 56px 24px; }
+  .reviewsGrid { grid-template-columns: 1fr; gap: 20px; }
+}

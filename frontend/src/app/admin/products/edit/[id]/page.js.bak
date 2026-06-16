@@ -1,0 +1,149 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+
+export default function EditProduct() {
+    const params = useParams();
+    const router = useRouter();
+
+    const [name, setName] = useState("");
+    const [description, setDescription] =
+        useState("");
+    const [price, setPrice] = useState("");
+    const [image, setImage] = useState("");
+    const [categoryId, setCategoryId] =
+        useState("");
+
+    useEffect(() => {
+        loadProduct();
+    }, []);
+
+    async function loadProduct() {
+        const response = await fetch(
+            `http://127.0.0.1:8000/products/${params.id}`
+        );
+
+        const product =
+            await response.json();
+
+        setName(product.name);
+        setDescription(product.description);
+        setPrice(product.price);
+        setImage(product.image);
+        setCategoryId(product.category_id);
+    }
+
+    async function handleUpdate(e) {
+        e.preventDefault();
+
+        const token =
+            localStorage.getItem("token");
+
+        const response = await fetch(
+            `http://127.0.0.1:8000/products/${params.id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type":
+                        "application/json",
+                    Authorization:
+                        `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    name,
+                    description,
+                    price: Number(price),
+                    image,
+                    category_id: Number(
+                        categoryId
+                    ),
+                }),
+            }
+        );
+
+        if (response.ok) {
+            alert(
+                "Product Updated Successfully"
+            );
+
+            router.push(
+                "/admin/dashboard"
+            );
+        } else {
+            alert("Update Failed");
+        }
+    }
+
+    return (
+        <div
+            style={{
+                maxWidth: "600px",
+                margin: "40px auto",
+            }}
+        >
+            <h1>Edit Product</h1>
+
+            <form
+                onSubmit={handleUpdate}
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "15px",
+                }}
+            >
+                <input
+                    type="text"
+                    placeholder="Product Name"
+                    value={name}
+                    onChange={(e) =>
+                        setName(e.target.value)
+                    }
+                />
+
+                <textarea
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) =>
+                        setDescription(
+                            e.target.value
+                        )
+                    }
+                />
+
+                <input
+                    type="number"
+                    placeholder="Price"
+                    value={price}
+                    onChange={(e) =>
+                        setPrice(e.target.value)
+                    }
+                />
+
+                <input
+                    type="text"
+                    placeholder="Image"
+                    value={image}
+                    onChange={(e) =>
+                        setImage(e.target.value)
+                    }
+                />
+
+                <input
+                    type="number"
+                    placeholder="Category ID"
+                    value={categoryId}
+                    onChange={(e) =>
+                        setCategoryId(
+                            e.target.value
+                        )
+                    }
+                />
+
+                <button type="submit">
+                    Update Product
+                </button>
+            </form>
+        </div>
+    );
+}
