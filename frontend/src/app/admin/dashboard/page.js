@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../Admin.module.css";
-import { API_URL } from "../../services/productService";
+import { API_URL } from "../../../services/productService";
 
 export default function AdminDashboard() {
   const router = useRouter();
