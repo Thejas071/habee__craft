@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "../../../Admin.module.css";
+import { API_URL } from "../../../../services/productService";
 
 export default function EditCategory() {
   const params = useParams();
@@ -24,9 +25,7 @@ export default function EditCategory() {
 
   async function loadCategory() {
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/categories/${params.id}`
-      );
+      const response = await fetch(`${API_URL}/categories/${params.id}`);
       if (!response.ok) {
         throw new Error("Category not found");
       }
@@ -45,8 +44,7 @@ export default function EditCategory() {
     const token = localStorage.getItem("admin_token");
 
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/categories/${params.id}`,
+      const response = await fetch(`${API_URL}/categories/${params.id}`,
         {
           method: "PUT",
           headers: {

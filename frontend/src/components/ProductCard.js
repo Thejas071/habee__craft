@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import styles from "../app/shop/shop.module.css"; // adjust path if needed
+import { API_URL } from "../services/productService";
 
 export default function ProductCard({ product }) {
   return (
@@ -14,7 +15,7 @@ export default function ProductCard({ product }) {
         <div className={styles.imageContainer}>
           {product.image ? (
             <img
-              src={`http://127.0.0.1:8000/uploads/products/${product.image}`}
+              src={`${API_URL}/uploads/products/${product.image}`}
               alt={product.name}
               className={styles.productImage}
             />

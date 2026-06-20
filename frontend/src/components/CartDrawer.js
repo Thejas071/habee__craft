@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import styles from "./CartDrawer.module.css";
+import { API_URL } from "../services/productService";
 
 export default function CartDrawer() {
   const {
@@ -19,7 +20,7 @@ export default function CartDrawer() {
   useEffect(() => {
     async function fetchNumber() {
       try {
-        const res = await fetch("http://127.0.0.1:8000/contact/");
+        const res = await fetch(`${API_URL}/contact/`);
         if (res.ok) {
           const data = await res.json();
           const cleanNum = (data.whatsapp || "+919876543210").replace(/\D/g, "");
@@ -111,7 +112,7 @@ export default function CartDrawer() {
             cartItems.map((item) => (
               <div className={styles.cartItem} key={item.id}>
                 <img
-                  src={`http://127.0.0.1:8000/uploads/products/${item.image}`}
+                  src={`${API_URL}/uploads/products/${item.image}`}
                   alt={item.name}
                   className={styles.itemImage}
                 />

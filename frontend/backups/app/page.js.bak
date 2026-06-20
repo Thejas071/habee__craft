@@ -1,0 +1,86 @@
+export const dynamic = "force-dynamic";
+
+import Link from "next/link";
+import styles from "./Home.module.css";
+
+async function getHomepageData() {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/homepage/", { cache: "no-store" });
+    if (res.ok) return await res.json();
+  } catch (e) {}
+  return null;
+}
+
+export default async function Home() {
+  const cms = await getHomepageData();
+
+  const heroTitle = cms?.hero_title || "Handmade Gifts & Premium Bouquets";
+  const heroSubtitle = cms?.hero_subtitle || "Made with love and passion.";
+  const heroButtonText = cms?.hero_button_text || "View all products";
+  const sectionTitle = cms?.section_title || "Why Choose Habee Craft?";
+
+  const features = [
+    {
+      title: "100% Handcrafted",
+      text: "Every item is made by local artisans with care and attention to detail.",
+      emoji: "🌸",
+    },
+    {
+      title: "Fresh Flowers",
+      text: "We source the freshest blooms and materials from trusted local growers.",
+      emoji: "💐",
+    },
+    {
+      title: "Custom Orders",
+      text: "Tell us your vision and we will craft a personalized gift just for you.",
+      emoji: "🎁",
+    },
+    {
+      title: "WhatsApp Ordering",
+      text: "Order directly via WhatsApp — simple, fast and no app needed.",
+      emoji: "💬",
+    },
+  ];
+
+  return (
+    <main>
+      {/* ── HERO ── */}
+      <section className={styles.hero}>
+        <div className={styles.heroText}>
+          <h1 className={styles.heroTitle}>{heroTitle}</h1>
+          <p className={styles.heroSubtitle}>{heroSubtitle}</p>
+          {/* Outlined button — exactly like reference */}
+          <Link href="/shop" className={styles.heroCta}>
+            {heroButtonText}
+          </Link>
+        </div>
+        {/* Decorative right side — soft colored area with logo */}
+        <div className={styles.heroVisual} aria-hidden="true">
+          <div className={styles.heroBlob} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "transparent" }}>
+            <img src="/logo.png" alt="Habee Craft Logo" style={{ width: "100%", height: "100%", objectFit: "contain", mixBlendMode: "multiply" }} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURES ── */}
+      <section className={styles.features}>
+        <h2 className={styles.sectionTitle}>{sectionTitle}</h2>
+        <div className={styles.featuresGrid}>
+          {features.map((f) => (
+            <div key={f.title} className={styles.featureCard}>
+              <span className={styles.featureEmoji}>{f.emoji}</span>
+              <h3 className={styles.featureTitle}>{f.title}</h3>
+              <p className={styles.featureText}>{f.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA STRIP ── */}
+      <section className={styles.ctaStrip}>
+        <p className={styles.ctaText}>Ready to create something beautiful?</p>
+        <Link href="/contact" className={styles.ctaBtn}>Order via WhatsApp →</Link>
+      </section>
+    </main>
+  );
+}

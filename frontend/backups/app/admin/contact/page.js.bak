@@ -1,0 +1,110 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import styles from "../Admin.module.css";
+
+export default function AdminContact() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const [formData, setFormData] = useState({
+    email: "",
+    phone: "",
+    whatsapp: "",
+    address: "",
+    hours: "",
+    map_link: "",
+    instagram: "",
+  });
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem("admin_token");
+    if (!savedToken) {
+      router.push("/admin/login");
+    } else {
+      fetchData();
+    }
+  }, [router]);
+
+  const fetchData = async () => {
+    setFetching(true);
+    try {
+      const res = await fetch("http://127.0.0.1:8000/contact/");
+      if (res.ok) {
+        const data = await res.json();
+        setFormData({
+          email: data.email || "",
+          phone: data.phone || "",
+          whatsapp: data.whatsapp || "",
+          address: data.address || "",
+          hours: data.hours || "",
+          map_link: data.map_link || "",
+          instagram: data.instagram || "",
+        });
+      }
+    } catch (err) {
+      setError("Could not load contact data.");
+    } finally {
+      setFetching(false);
+    }
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    try {
+      const savedToken = localStorage.getItem("admin_token");
+      const res = await fetch("http://127.0.0.1:8000/contact/", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${savedToken}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.detail || "Failed to save contact settings.");
+      }
+
+      setSuccess("Contact information updated successfully!");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const whatsappPreview = formData.whatsapp
+    ? `https://wa.me/${formData.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi! I am interested in placing an order.")}`
+    : null;
+
+  return (
+    <main className={styles.dashboardContainer}>
+      <div className={styles.dashboardHeader}>
+        <div>
+          <h1 className={styles.dashboardTitle}>Contact & WhatsApp CMS</h1>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", marginTop: "4px" }}>
+            Update contact details, business hours, and WhatsApp ordering number.
+          </p>
+        </div>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <button onClick={() => router.push("/admin/dashboard")} className={styles.logoutBtn}>
+            ← Dashboard
+          </button>
+          <button
+            onClick={() => { localStorage.removeItem("admin_token"); router.push("/admin/login"); }}
+            className={styles.logoutBtn}
+          >
+            Sign Out
+          </button>
+        </div>
+      </div>

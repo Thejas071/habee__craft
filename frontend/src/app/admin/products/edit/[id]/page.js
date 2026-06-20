@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import styles from "../../../Admin.module.css";
+import { API_URL } from "../../../../services/productService";
 
 export default function EditProduct() {
   const params = useParams();
@@ -36,8 +37,8 @@ export default function EditProduct() {
     setFetching(true);
     try {
       const [productRes, catRes] = await Promise.all([
-        fetch(`http://127.0.0.1:8000/products/${params.id}`),
-        fetch("http://127.0.0.1:8000/categories/"),
+        fetch(`${API_URL}/products/${params.id}`),
+        fetch(`${API_URL}/categories/`),
       ]);
       const product = await productRes.json();
       const cats = await catRes.json();
@@ -68,7 +69,7 @@ export default function EditProduct() {
       for (const file of files) {
         const formDataObj = new FormData();
         formDataObj.append("file", file);
-        const res = await fetch("http://127.0.0.1:8000/upload/", {
+        const res = await fetch(`${API_URL}/upload/`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: formDataObj,
@@ -107,7 +108,7 @@ export default function EditProduct() {
 
     try {
       const token = localStorage.getItem("admin_token");
-      const response = await fetch(`http://127.0.0.1:8000/products/${params.id}`, {
+      const response = await fetch(`${API_URL}/products/${params.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -184,7 +185,7 @@ export default function EditProduct() {
           <span className={styles.cardTitle}>Product Details</span>
           {formData.image && (
             <img
-              src={`http://127.0.0.1:8000/uploads/products/${formData.image}`}
+              src={`${API_URL}/uploads/products/${formData.image}`}
               alt="Current product"
               style={{ width: "48px", height: "48px", borderRadius: "8px", objectFit: "cover", border: "2px solid var(--primary-light)" }}
             />
@@ -284,7 +285,7 @@ export default function EditProduct() {
                   <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "12px" }}>
                     {formData.gallery.map((img, idx) => (
                       <div key={idx} style={{ position: "relative", width: "70px", height: "70px", border: "1px solid var(--border)", borderRadius: "6px", overflow: "hidden" }}>
-                        <img src={`http://127.0.0.1:8000/uploads/products/${img}`} alt="gallery preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <img src={`${API_URL}/uploads/products/${img}`} alt="gallery preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         <button
                           type="button"
                           onClick={() => handleRemoveGalleryImage(img)}

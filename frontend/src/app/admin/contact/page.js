@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../Admin.module.css";
+import { API_URL } from "../../../services/productService";
 
 export default function AdminContact() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function AdminContact() {
   const fetchData = async () => {
     setFetching(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/contact/");
+      const res = await fetch(`${API_URL}/contact/`);
       if (res.ok) {
         const data = await res.json();
         setFormData({
@@ -61,7 +62,7 @@ export default function AdminContact() {
 
     try {
       const savedToken = localStorage.getItem("admin_token");
-      const res = await fetch("http://127.0.0.1:8000/contact/", {
+      const res = await fetch(`${API_URL}/contact/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

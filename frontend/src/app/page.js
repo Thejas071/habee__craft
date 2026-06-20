@@ -2,10 +2,11 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import styles from "./Home.module.css";
+import { API_URL } from "../services/productService";
 
 async function getHomepageData() {
   try {
-    const res = await fetch("http://127.0.0.1:8000/homepage/", { cache: "no-store" });
+    const res = await fetch(`${API_URL}/homepage/`, { cache: "no-store" });
     if (res.ok) return await res.json();
   } catch (e) {}
   return null;

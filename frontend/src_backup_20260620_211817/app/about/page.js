@@ -1,0 +1,71 @@
+export const dynamic = "force-dynamic";
+
+import styles from "./About.module.css";
+
+async function getAboutData() {
+  try {
+    const res = await fetch("http://127.0.0.1:8000/about/", {
+      cache: "no-store",
+    });
+    if (res.ok) return await res.json();
+  } catch (e) {}
+  return null;
+}
+
+export default async function AboutPage() {
+  const cms = await getAboutData();
+
+  const title = cms?.title || "About Habee Craft";
+  const subtitle = cms?.subtitle || "Our story, our passion, and our handcrafted promise.";
+  const description =
+    cms?.description ||
+    "Welcome to Habee Craft, where we transform standard gifting into unforgettable personal experiences. Established with a passion for creative expression and flower aesthetics, we specialise in bespoke handmade gifts, everlasting dry floral arrangements, and premium fresh bouquets for every milestone.";
+  const description2 =
+    cms?.description2 ||
+    "We began as a small home studio crafting custom gift hampers for friends and family. Realizing the lack of personalized, high-end, and truly authentic handcrafted items in local shops, we launched Habee Craft to bridge the gap. Today, we work diligently to curate unique layouts, selecting premium papers, textures, and blooms.";
+
+  const values = [
+    {
+      title: cms?.value1_title || "Handmade Quality",
+      text: cms?.value1_text || "Every bouquet is wrapped by hand, and every gift box is curated individually to assure the highest standard.",
+      emoji: "🌸",
+    },
+    {
+      title: cms?.value2_title || "Crafted with Love",
+      text: cms?.value2_text || "We believe gifts carry emotions. Our designs focus on delivering pure joy and warmth to your loved ones.",
+      emoji: "💖",
+    },
+    {
+      title: cms?.value3_title || "Local Artistry",
+      text: cms?.value3_text || "We collaborate with local craftspeople and flower nurseries, supporting communities and choosing freshness.",
+      emoji: "🌿",
+    },
+  ];
+
+  return (
+    <main className={styles.aboutContainer}>
+      <section className={styles.hero}>
+        <h1 className={styles.pageTitle}>{title}</h1>
+        <p className={styles.subtitle}>{subtitle}</p>
+      </section>
+
+      <section className={styles.storySection}>
+        <p className={styles.storyText}>{description}</p>
+        <p className={styles.storyText}>{description2}</p>
+      </section>
+
+      <section className={styles.valuesSection}>
+        <h2 className={styles.gridTitle}>Our Core Values</h2>
+        <div className={styles.valuesGrid}>
+          {values.map((v, i) => (
+            <div key={i} className={styles.valueCard}>
+              <span className={styles.valueEmoji}>{v.emoji}</span>
+              <h3 className={styles.valueTitle}>{v.title}</h3>
+              <p className={styles.valueText}>{v.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}

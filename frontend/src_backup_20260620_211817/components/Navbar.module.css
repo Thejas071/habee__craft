@@ -1,0 +1,300 @@
+/* Navbar — white bg, thin text, simple */
+.navContainer {
+  position: sticky;
+  top: 0;
+  z-index: 350;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid #ede8e5;
+  box-shadow: none;
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: #1a1614;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logoBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #c9366b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.navLink {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #8a8280;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: color 0.15s;
+  position: relative;
+}
+
+.navLink:hover {
+  color: #1a1614;
+}
+
+.activeNavLink {
+  color: #1a1614 !important;
+  border-bottom: 1.5px solid #1a1614;
+}
+
+.adminLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7a7270;
+  border: 1px solid #ddd8d5;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.adminLink:hover {
+  border-color: #c9366b;
+  color: #c9366b;
+}
+
+.adminLinkActive {
+  border-color: #c9366b !important;
+  color: #c9366b !important;
+  background: #fde8ef !important;
+}
+
+/* ── Hamburger button ── */
+.hamburger {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: 1px solid #ddd8d5;
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 6px;
+  color: #1a1614;
+  transition: border-color 0.15s, color 0.15s;
+  position: relative;
+  z-index: 351;
+  overflow: visible;
+}
+
+.hamburgerOpen {
+  border-color: #c9366b !important;
+  color: #c9366b !important;
+}
+
+.hamburgerIcon {
+  position: relative;
+  width: 18px;
+  height: 14px;
+}
+
+.hamburgerLine {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transform-origin: center center;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, top 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburgerLine:nth-child(1) {
+  top: 0;
+}
+
+.hamburgerLine:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburgerLine:nth-child(3) {
+  top: 100%;
+  transform: translateY(-100%);
+}
+
+.hamburger:hover {
+  border-color: #c9366b;
+  color: #c9366b;
+}
+
+/* ── Mobile overlay ── */
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* ── Mobile drawer ── */
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 270px;
+  height: 100dvh;
+  background: #ffffff;
+  border-left: 1px solid #ede8e5;
+  padding: 20px 24px 28px;
+  gap: 4px;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 300;
+  box-shadow: -6px 0 32px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.mobileMenuOpen {
+  transform: translateX(0) !important;
+}
+
+/* ── Close (✕) button inside drawer ── */
+.drawerClose {
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid #ede8e5;
+  border-radius: 8px;
+  color: #7a7270;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.drawerClose:hover {
+  border-color: #c9366b;
+  color: #c9366b;
+  background: #fde8ef;
+}
+
+/* ── Mobile nav links ── */
+.mobileNavLink {
+  display: block;
+  padding: 11px 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #7a7270;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.mobileNavLink:hover {
+  background: #f9f3f0;
+  color: #1a1614;
+}
+
+.activeMobileNavLink {
+  background: #fde8ef !important;
+  color: #c9366b !important;
+  font-weight: 600;
+}
+
+/* ── Right controls ── */
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cartButton {
+  position: relative;
+  background: none;
+  border: none;
+  color: #1a1614;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.cartButton:hover {
+  background: #fdf5f2;
+  color: #c9366b;
+}
+
+.cartBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #c9366b;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 0 20px;
+    height: 58px;
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobileMenu {
+    display: flex;
+  }
+}

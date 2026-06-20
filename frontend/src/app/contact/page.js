@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react";
 import styles from "./Contact.module.css";
+import { API_URL } from "../../services/productService";
 
 export default function ContactPage() {
   const [contactInfo, setContactInfo] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/contact/")
+    fetch(`${API_URL}/contact/`)
       .then((r) => r.json())
       .then((d) => setContactInfo(d))
       .catch(() => {});

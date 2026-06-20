@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../Admin.module.css";
+import { API_URL } from "../../services/productService";
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -47,14 +48,14 @@ export default function AdminDashboard() {
       const headers = { Authorization: `Bearer ${authToken}` };
 
       // Fetch Products
-      const prodRes = await fetch("http://127.0.0.1:8000/products/");
+      const prodRes = await fetch(`${API_URL}/products/`);
       if (prodRes.ok) {
         const prodData = await prodRes.json();
         setProducts(prodData);
       }
 
       // Fetch Categories
-      const catRes = await fetch("http://127.0.0.1:8000/categories/");
+      const catRes = await fetch(`${API_URL}/categories/`);
       if (catRes.ok) {
         const catData = await catRes.json();
         setCategories(catData);
@@ -64,7 +65,7 @@ export default function AdminDashboard() {
       }
 
       // Fetch Recovery Code
-      const recRes = await fetch("http://127.0.0.1:8000/auth/recovery-code", { headers });
+      const recRes = await fetch(`${API_URL}/auth/recovery-code`, { headers });
       if (recRes.ok) {
         const recData = await recRes.json();
         if (recData.code) {
@@ -87,7 +88,7 @@ export default function AdminDashboard() {
     const formData = new FormData();
     formData.append("file", imageFile);
 
-    const res = await fetch("http://127.0.0.1:8000/upload/", {
+    const res = await fetch(`${API_URL}/upload/`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
@@ -112,7 +113,7 @@ export default function AdminDashboard() {
       for (const file of files) {
         const formData = new FormData();
         formData.append("file", file);
-        const res = await fetch("http://127.0.0.1:8000/upload/", {
+        const res = await fetch(`${API_URL}/upload/`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
@@ -168,7 +169,7 @@ export default function AdminDashboard() {
         gallery: prodForm.gallery || [],
       };
 
-      const res = await fetch("http://127.0.0.1:8000/products/", {
+      const res = await fetch(`${API_URL}/products/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -209,7 +210,7 @@ export default function AdminDashboard() {
     setSuccess("");
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/products/${id}`, {
+      const res = await fetch(`${API_URL}/products/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -233,7 +234,7 @@ export default function AdminDashboard() {
     setSuccess("");
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/categories/", {
+      const res = await fetch(`${API_URL}/categories/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: catName }),
@@ -259,7 +260,7 @@ export default function AdminDashboard() {
     setSuccess("");
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/categories/${id}`, {
+      const res = await fetch(`${API_URL}/categories/${id}`, {
         method: "DELETE",
       });
 
@@ -463,7 +464,7 @@ export default function AdminDashboard() {
                           <tr key={p.id}>
                             <td>
                               <img
-                                src={`http://127.0.0.1:8000/uploads/products/${p.image}`}
+                                src={`${API_URL}/uploads/products/${p.image}`}
                                 alt={p.name}
                                 className={styles.thumbnail}
                               />
@@ -607,7 +608,7 @@ export default function AdminDashboard() {
                       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "12px" }}>
                         {prodForm.gallery.map((img, idx) => (
                           <div key={idx} style={{ position: "relative", width: "70px", height: "70px", border: "1px solid var(--border)", borderRadius: "6px", overflow: "hidden" }}>
-                            <img src={`http://127.0.0.1:8000/uploads/products/${img}`} alt="gallery preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            <img src={`${API_URL}/uploads/products/${img}`} alt="gallery preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                             <button
                               type="button"
                               onClick={() => handleRemoveGalleryImage(img)}

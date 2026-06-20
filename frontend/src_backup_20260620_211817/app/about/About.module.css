@@ -1,0 +1,130 @@
+/* ── ABOUT PAGE ── Warm, editorial, gifting brand ── */
+
+.aboutContainer {
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Hero banner */
+.hero {
+  background: linear-gradient(135deg, #fce8f0 0%, #fdf3e7 100%);
+  padding: 80px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '🌸';
+  position: absolute;
+  font-size: 120px;
+  opacity: 0.06;
+  top: -20px;
+  right: 5%;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.pageTitle {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  color: #1e1414;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #a09490;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* Story section */
+.storySection {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 72px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.storyText {
+  font-size: 1.05rem;
+  color: #5a4f4c;
+  line-height: 1.8;
+}
+
+/* Values */
+.valuesSection {
+  background: #fdf8f5;
+  padding: 80px 40px;
+  border-top: 1px solid #edddd8;
+}
+
+.gridTitle {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  text-align: center;
+  color: #1e1414;
+  margin-bottom: 48px;
+  letter-spacing: -0.02em;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.valueCard {
+  background: #ffffff;
+  border: 1px solid #edddd8;
+  padding: 36px 28px;
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.valueCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #c9366b, #d4a373);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.valueCard:hover { transform: translateY(-6px); box-shadow: 0 8px 28px rgba(201,54,107,0.1); }
+.valueCard:hover::before { opacity: 1; }
+
+.valueEmoji { font-size: 2.2rem; margin-bottom: 14px; display: block; }
+
+.valueTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e1414;
+  margin-bottom: 10px;
+  font-family: var(--font);
+  letter-spacing: -0.01em;
+}
+
+.valueText {
+  font-size: 0.875rem;
+  color: #8a7f7c;
+  line-height: 1.65;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 60px 24px; }
+  .storySection { padding: 48px 24px; }
+  .valuesSection { padding: 56px 24px; }
+}

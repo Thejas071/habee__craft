@@ -1,11 +1,12 @@
 export const dynamic = "force-dynamic";
 
 import styles from "./Testimonials.module.css";
+import { API_URL } from "../../services/productService";
 
 export default async function TestimonialsPage() {
   let reviews = [];
   try {
-    const res = await fetch("http://127.0.0.1:8000/testimonials/", {
+    const res = await fetch(`${API_URL}/testimonials/`, {
       cache: "no-store",
     });
     if (res.ok) {

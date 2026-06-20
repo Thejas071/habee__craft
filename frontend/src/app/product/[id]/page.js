@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getProduct } from "../../../services/productService";
+import { getProduct, API_URL } from "../../../services/productService";
 import { useCart } from "../../../context/CartContext";
 import styles from "../Product.module.css";
 
@@ -76,7 +76,7 @@ export default function ProductPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div className={styles.imageSection}>
             <img
-              src={`http://127.0.0.1:8000/uploads/products/${activeImage}`}
+              src={`${API_URL}/uploads/products/${activeImage}`}
               alt={product.name}
               className={styles.productImage}
             />
@@ -103,7 +103,7 @@ export default function ProductPage() {
                   }}
                 >
                   <img
-                    src={`http://127.0.0.1:8000/uploads/products/${imgName}`}
+                    src={`${API_URL}/uploads/products/${imgName}`}
                     alt={`${product.name} gallery ${idx + 1}`}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />

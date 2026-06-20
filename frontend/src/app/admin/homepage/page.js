@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../Admin.module.css";
+import { API_URL } from "../../../services/productService";
 
 export default function AdminHomepage() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function AdminHomepage() {
   const fetchData = async () => {
     setFetching(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/homepage/");
+      const res = await fetch(`${API_URL}/homepage/`);
       if (res.ok) {
         const data = await res.json();
         setFormData({
@@ -57,7 +58,7 @@ export default function AdminHomepage() {
 
     try {
       const savedToken = localStorage.getItem("admin_token");
-      const res = await fetch("http://127.0.0.1:8000/homepage/", {
+      const res = await fetch(`${API_URL}/homepage/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

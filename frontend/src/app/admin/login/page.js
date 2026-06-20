@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { API_URL } from "../../../services/productService";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function AdminLogin() {
     e.preventDefault();
     setError(""); setSuccess(""); setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/auth/login", {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -53,7 +54,7 @@ export default function AdminLogin() {
     e.preventDefault();
     setError(""); setSuccess(""); setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/auth/verify-recovery", {
+      const res = await fetch(`${API_URL}/auth/verify-recovery`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ recovery_code: recoveryCode }),
@@ -78,7 +79,7 @@ export default function AdminLogin() {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/auth/reset-password", {
+      const res = await fetch(`${API_URL}/auth/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: resetToken, new_password: newPassword }),

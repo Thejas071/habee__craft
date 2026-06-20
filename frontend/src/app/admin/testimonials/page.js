@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../Admin.module.css";
+import { API_URL } from "../../../services/productService";
 
 export default function TestimonialsAdmin() {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function TestimonialsAdmin() {
 
   const fetchTestimonials = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/testimonials/");
+      const res = await fetch(`${API_URL}/testimonials/`);
       if (res.ok) {
         const data = await res.json();
         setTestimonials(data);
@@ -65,8 +66,8 @@ export default function TestimonialsAdmin() {
     };
 
     const url = editingId 
-      ? `http://127.0.0.1:8000/testimonials/${editingId}`
-      : "http://127.0.0.1:8000/testimonials/";
+      ? `${API_URL}/testimonials/${editingId}`
+      : `${API_URL}/testimonials/`;
 
     const method = editingId ? "PUT" : "POST";
 
@@ -103,7 +104,7 @@ export default function TestimonialsAdmin() {
     setSuccess("");
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/testimonials/${id}`, {
+        const res = await fetch(`${API_URL}/testimonials/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

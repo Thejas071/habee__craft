@@ -1,10 +1,11 @@
 export const dynamic = "force-dynamic";
 
 import styles from "./About.module.css";
+import { API_URL } from "../../services/productService";
 
 async function getAboutData() {
   try {
-    const res = await fetch("http://127.0.0.1:8000/about/", {
+    const res = await fetch(`${API_URL}/about/`, {
       cache: "no-store",
     });
     if (res.ok) return await res.json();
