@@ -1,4 +1,6 @@
-export const API_URL = "http://127.0.0.1:8000";
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://habee-craft.onrender.com";
 
 /**
  * Fetch list of products with optional search and sort.
@@ -10,10 +12,12 @@ export async function getProducts(search = "", sort = "newest") {
       `${API_URL}/products/?search=${search}&sort=${sort}`,
       { cache: "no-store" }
     );
+
     if (!response.ok) {
       console.error("Failed to fetch products", response.status);
       return [];
     }
+
     return await response.json();
   } catch (err) {
     console.error("Error fetching products:", err);
@@ -27,11 +31,16 @@ export async function getProducts(search = "", sort = "newest") {
  */
 export async function getProduct(id) {
   try {
-    const response = await fetch(`${API_URL}/products/${id}`, { cache: "no-store" });
+    const response = await fetch(
+      `${API_URL}/products/${id}`,
+      { cache: "no-store" }
+    );
+
     if (!response.ok) {
       console.error("Failed to fetch product", response.status);
       return null;
     }
+
     return await response.json();
   } catch (err) {
     console.error("Error fetching product:", err);
