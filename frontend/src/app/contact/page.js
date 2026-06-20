@@ -11,15 +11,15 @@ export default function ContactPage() {
     fetch(`${API_URL}/contact/`)
       .then((r) => r.json())
       .then((d) => setContactInfo(d))
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const email = contactInfo?.email || "info@habeecraft.com";
-  const phone = contactInfo?.phone || "+919876543210";
-  const whatsapp = contactInfo?.whatsapp || "+919876543210";
+  const phone = contactInfo?.phone || "+918073604312";
+  const whatsapp = contactInfo?.whatsapp || "+918073604312";
   const address = contactInfo?.address || "Koramangala, Bangalore, Karnataka, India";
   const hours = contactInfo?.hours || "Monday to Sunday, 9am - 8pm";
-  const instagram = contactInfo?.instagram || "habee_craft";
+  const instagram = contactInfo?.instagram || "habee__craft";
 
   // Build Instagram URL — supports both handle and full URL
   const instagramUrl = instagram.startsWith("http")
