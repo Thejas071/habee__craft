@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.core.database import Base, engine
+from app.core.database import Base, engine, SessionLocal
 
 from app.models.admin import Admin
 from app.models.category import Category
@@ -13,6 +13,8 @@ from app.models.homepage import Homepage
 from app.models.about import About
 from app.models.contact import Contact
 
+from app.core.auth import get_password_hash
+
 from app.routers.auth import router as auth_router
 from app.routers.categories import router as category_router
 from app.routers.products import router as product_router
@@ -22,7 +24,30 @@ from app.routers.homepage import router as homepage_router
 from app.routers.about import router as about_router
 from app.routers.contact import router as contact_router
 
+# Create all database tables
 Base.metadata.create_all(bind=engine)
+
+# Create default admin if it doesn't exist
+db = SessionLocal()
+
+try:
+    admin = db.query(Admin).filter(Admin.username == "admin").first()
+
+    if admin is None:
+        admin = Admin(
+            username="admin",
+            password_hash=get_password_hash("admin123")
+        )
+
+        db.add(admin)
+        db.commit()
+
+        print("✅ Default admin created")
+    else:
+        print("✅ Admin already exists")
+
+finally:
+    db.close()
 
 app = FastAPI(
     title="Habee Craft API"
@@ -62,4 +87,3 @@ def root():
     return {
         "message": "Habee Craft API Running"
     }
-    
